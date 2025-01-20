@@ -3,7 +3,7 @@
 mkdir -p ssh
 mkdir -p nvim 
 
-cp -r ~/.ssh/* ssh/.
+cp ~/.gitconfig .
 cp -r ~/.config/nvim/* nvim/.
 
 docker build --build-arg USER="$USER" -t cernvim .
