@@ -12,6 +12,7 @@ if [ $# -eq 0 ]; then
   docker run -it --rm \
     -v "$CURRENT_DIR:/workspace" \
     -v "$HOME/.ssh:/home/$USER/.ssh" \
+    -v "$HOME/.gitconfig:/home/$USER/.gitconfig" \
     -w /workspace \
     "$IMAGE_NAME" nvim
 else
@@ -20,6 +21,7 @@ else
   docker run -it --rm \
     -v "$CURRENT_DIR:/workspace" \
     -v "$HOME/.ssh:/home/$USER/.ssh" \
+    -v "$HOME/.gitconfig:/home/$USER/.gitconfig" \
     -w /workspace \
     "$IMAGE_NAME" nvim "$FILE"
 fi
