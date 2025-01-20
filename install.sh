@@ -1,13 +1,14 @@
-#!/bin/bash 
+#!/bin/bash
 
 mkdir -p ssh
-mkdir -p nvim 
+mkdir -p nvim
 
 cp ~/.gitconfig .
 cp -r ~/.config/nvim/* nvim/.
 
-docker build --build-arg USER="$USER" -t cernvim .
+MYUSER=$(whoami)
 
+docker build --build-arg USER="$MYUSER" -t cernvim .
 
 # Define the target directory for executables
 TARGET_DIR="$HOME/.local/bin"
@@ -22,10 +23,10 @@ chmod +x cernvim
 cp cernvim "$TARGET_DIR/"
 
 # Verify the target directory is in PATH
-if [[ ":$PATH:" != *":$TARGET_DIR:"* ]]; then
-    echo "Adding $TARGET_DIR to PATH in your shell configuration file..."
-    echo "export PATH=\"$TARGET_DIR:\$PATH\"" >> "$HOME/.bashrc"
-    export PATH="$TARGET_DIR:$PATH"
+if [[ ":$PATH:" != *":$TARGET_DIR"* ]]; then
+	echo "Adding $TARGET_DIR to PATH in your shell configuration file..."
+	echo "export PATH=\"$TARGET_DIR:\$PATH\"" >>"$HOME/.bashrc"
+	export PATH="$TARGET_DIR:$PATH"
 fi
 
 echo -e "\nInstallation complete. You can now use cernvim"
