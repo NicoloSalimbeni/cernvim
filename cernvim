@@ -8,17 +8,18 @@ CURRENT_DIR=$(pwd)
 
 # Check if a file argument is provided
 if [ $# -eq 0 ]; then
-    # No arguments, open Neovim in the current folder
-    docker run -it --rm \
-        -v "$CURRENT_DIR:/workspace" \
-        -w /workspace \
-        "$IMAGE_NAME" nvim
+  # No arguments, open Neovim in the current folder
+  docker run -it --rm \
+    -v "$CURRENT_DIR:/workspace" \
+    -v "$HOME/.ssh:/home/$USER/.ssh" \
+    -w /workspace \
+    "$IMAGE_NAME" nvim
 else
-    # Argument provided, open Neovim with the specified file
-    FILE="$1"
-    docker run -it --rm \
-        -v "$CURRENT_DIR:/workspace" \
-        -w /workspace \
-        "$IMAGE_NAME" nvim "$FILE"
+  # Argument provided, open Neovim with the specified file
+  FILE="$1"
+  docker run -it --rm \
+    -v "$CURRENT_DIR:/workspace" \
+    -v "$HOME/.ssh:/home/$USER/.ssh" \
+    -w /workspace \
+    "$IMAGE_NAME" nvim "$FILE"
 fi
-

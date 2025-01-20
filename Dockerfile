@@ -38,10 +38,11 @@ WORKDIR /home/$USER/workspace
 
 # Set up SSH keys for the user
 RUN mkdir -p /home/$USER/.ssh
-COPY ssh /home/$USER/.ssh
 
 RUN echo 'eval "$(starship init bash)"' >> /home/$USER/.bashrc
 RUN starship preset gruvbox-rainbow -o ~/.config/starship.toml
+
+COPY .gitconfig /home/$USER/.
 
 # Default command
 CMD ["nvim"]
